@@ -3,6 +3,7 @@ import http from 'http'
 import mongoose from 'mongoose'
 import { config } from './config/config'
 import Logging from './library/Logging'
+import userRoutes from './routes/User'
 
 const router = express()
 
@@ -48,6 +49,7 @@ const startServer = () => {
     })
 
     /* Routes */
+    router.use("/users", userRoutes)
 
     /* Health Check */
     router.get("/ping", (request: Request, response: Response) => {
