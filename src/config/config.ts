@@ -9,7 +9,12 @@ export const config = {
     mongo: {
         url: DB_URL || ""
     },
+
     server: {
         port: PORT || 3000
+    },
+
+    test: {
+        url: DB_URL?.replace(/development/, 'test') || ""
     }
 }

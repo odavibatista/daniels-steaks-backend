@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "Node16",
-    "target": "esnext",
+    "target": "ES5",
     "moduleResolution": "Node16",
     "moduleDetection": "auto",
     "allowImportingTsExtensions": true,

@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
 export interface User   {
     name: string
@@ -7,7 +7,11 @@ export interface User   {
     admin: boolean   
 }
 
-export interface UserModel extends User, Document {}
+export interface UserCreationAttributes extends User {}
+
+export interface UserInstance extends Model<User, UserCreationAttributes>, User {}
+
+export interface UserModel extends User {}
 
 const UserSchema: Schema = new Schema(
     {

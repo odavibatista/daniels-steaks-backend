@@ -71,3 +71,5 @@ const startServer = () => {
         Logging.info(`Server running on port ${config.server.port}`)
     })
 }
+
+export { startServer }
