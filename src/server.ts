@@ -14,7 +14,7 @@ mongoose
         Logging.info('Mongo connected successfully.');
         StartServer();
     })
-    .catch((error) => Logging.error(error));
+    .catch((error) => Logging.err(error));
 
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {
@@ -57,7 +57,7 @@ const StartServer = () => {
     router.use((req, res, next) => {
         const error = new Error('Not found');
 
-        Logging.error(error);
+        Logging.err(error);
 
         res.status(404).json({
             message: error.message

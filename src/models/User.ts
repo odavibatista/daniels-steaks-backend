@@ -1,13 +1,13 @@
 import mongoose, { Model, Schema } from "mongoose";
 
-export interface User   {
+export interface IUser   {
     name: string
     email: string
     password: string
     admin: boolean   
 }
 
-export interface UserModel extends User {}
+export interface IUserModel extends IUser {}
 
 const UserSchema: Schema = new Schema(
     {
@@ -46,4 +46,4 @@ const UserSchema: Schema = new Schema(
     }
 )
 
-export default mongoose.model<UserModel>("User", UserSchema)
+export default mongoose.model<IUserModel>("User", UserSchema)
