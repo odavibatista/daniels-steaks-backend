@@ -7,10 +7,6 @@ export interface User   {
     admin: boolean   
 }
 
-export interface UserCreationAttributes extends User {}
-
-export interface UserInstance extends Model<User, UserCreationAttributes>, User {}
-
 export interface UserModel extends User {}
 
 const UserSchema: Schema = new Schema(

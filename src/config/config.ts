@@ -12,9 +12,5 @@ export const config = {
 
     server: {
         port: PORT || 3000
-    },
-
-    test: {
-        url: DB_URL?.replace(/development/, 'test') || ""
     }
 }

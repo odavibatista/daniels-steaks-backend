@@ -1,75 +1,68 @@
-import express, { NextFunction, Request, Response, request } from 'express'
-import http from 'http'
-import mongoose from 'mongoose'
-import { config } from './config/config'
-import Logging from './library/Logging'
-import userRoutes from './routes/User'
+import express from 'express';
+import http from 'http';
+import mongoose from 'mongoose';
+import { config } from './config/config';
+import Logging from './library/Logging';
+import usersRouter from './routes/User';
 
-const router = express()
+const router = express();
 
-/* Connection to Atlas */
+/** Connect to Mongo */
 mongoose
-    .connect(config.mongo.url, { retryWrites: true, w: "majority" })
+    .connect(config.mongo.url, { retryWrites: true, w: 'majority' })
     .then(() => {
-        Logging.info("Connected to MongoDB remotely.")  
-        startServer()
+        Logging.info('Mongo connected successfully.');
+        StartServer();
     })
-    .catch((err) => {
-        Logging.err("Error while trying to connect to MongoDB remotely.")
-})
+    .catch((error) => Logging.error(error));
 
-const startServer = () => {
-    router.use((request: Request, response: Response, next: NextFunction) => {
+/** Only Start Server if Mongoose Connects */
+const StartServer = () => {
+    /** Log the request */
+    router.use((req, res, next) => {
+        /** Log the req */
+        Logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
-        /* Log the request */
-        Logging.info(`Incoming => Method: [${request.method}] | URL:[${request.url}] | IP: [${request.socket.remoteAddress}]`)
+        res.on('finish', () => {
+            /** Log the res */
+            Logging.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
+        });
 
-        response.on("finish", () => {
-            /* Log the response */
-            Logging.info(`Outgoing => Method: [${request.method}] | URL:[${request.url}] | IP: [${request.socket.remoteAddress}] | Status: [${response.statusCode}]`)
-        })
+        next();
+    });
 
-        next()
-    })
+    router.use(express.urlencoded({ extended: true }));
+    router.use(express.json());
 
-    router.use(express.urlencoded({ extended: true }))
-    router.use(express.json())
+    /** Rules of our API */
+    router.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    /* Rules of the API */
-    router.use((request: Request, response: Response, next: NextFunction) => {
-        response.header("Access-Control-Allow-Origin", "*")
-        response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
-        
-        if (request.method == "OPTIONS") {
-            response.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET")
-            return response.status(200).json({})
+        if (req.method == 'OPTIONS') {
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+            return res.status(200).json({});
         }
 
-        next()
-    })
+        next();
+    });
 
-    /* Routes */
-    router.use("/users", userRoutes)
+    /** Routes */
+    router.use('/users', usersRouter);
 
-    /* Health Check */
-    router.get("/ping", (request: Request, response: Response) => {
-        response.status(200).json({
-            message: "pong"
-        })
-    })
+    /** Healthcheck */
+    router.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));
 
-    /* Error handling */
-    router.use((request: Request, response: Response, next: NextFunction) => {
-        const error = new Error("Not found")
+    /** Error handling */
+    router.use((req, res, next) => {
+        const error = new Error('Not found');
 
-        return response.status(404).json({
+        Logging.error(error);
+
+        res.status(404).json({
             message: error.message
-        })
-    })
+        });
+    });
 
-    http.createServer(router).listen(config.server.port, () => {
-        Logging.info(`Server running on port ${config.server.port}`)
-    })
-}
-
-export { startServer }
+    http.createServer(router).listen(config.server.port, () => Logging.info(`Server is running on port ${config.server.port}`));
+};
