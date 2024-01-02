@@ -1,6 +1,6 @@
 import express from 'express'
 import controller from '../controllers/Category'
-import { schemas, validateSchema } from '../middleware/ValidateSchema'
+import { schemas, validateSchema } from '../middlewares/ValidateSchema'
 
 const router = express.Router()
 

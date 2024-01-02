@@ -1,9 +1,8 @@
-import dotenv from 'dotenv'
+import * as env from "env-var"
 
-dotenv.config()
-
-const DB_URL = process.env.DB_URL
-const PORT = process.env.PORT
+const DB_URL = env.get("DB_URL").required().asString()
+const PORT = env.get("PORT").required().asString()
+export const JWT_KEY = env.get("JWT_KEY").required().asString()
 
 export const config = {
     mongo: {
