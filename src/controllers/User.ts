@@ -14,8 +14,8 @@ const createUser = (request: Request, response: Response, next: NextFunction) =>
     })
 
     return user.save()
-            .then((user) => response.status(201).json({ user }))
-            .catch((error) => response.status(500).json({ error }))
+        .then((user) => response.status(201).json({ user }))
+        .catch((error) => response.status(500).json({ error }))
 }
 
 const getUser = (request: Request, response: Response, next: NextFunction) => {
