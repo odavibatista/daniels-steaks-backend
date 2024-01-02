@@ -1,10 +1,18 @@
 import mongoose, { Model, Schema } from "mongoose";
 
+type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void
+
 export interface IUser   {
     name: string
     email: string
     password: string
     admin: boolean   
+}
+
+export interface UserCreationAttributes extends IUser {}
+
+export interface IUserInstance extends Model<IUser, UserCreationAttributes> {
+    checkPassword: (password: string, callback: CheckPasswordCallback) => void
 }
 
 export interface IUserModel extends IUser {}
