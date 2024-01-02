@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, request } from "express";
 import mongoose from "mongoose"
 import Category from "../models/Category";
 
+/* Create a new category */
 const createCategory = (request: Request, response: Response, next: NextFunction) =>    {
     const { name, description } = request.body
 
@@ -16,6 +17,7 @@ const createCategory = (request: Request, response: Response, next: NextFunction
         .catch((error) => response.status(500).json({ error }))
 }
 
+/* Finding a category by its id */
 const getCategory = (request: Request, response: Response, next: NextFunction) => {
     const categoryId = request.params.categoryId
 
@@ -24,12 +26,14 @@ const getCategory = (request: Request, response: Response, next: NextFunction) =
         .catch((error) => response.status(500).json({ error }));
 }
 
+/* Get all the categories */
 const getAllCategories = (request: Request, response: Response, next: NextFunction) => {
     return Category.find()
         .then((categories) => response.status(200).json({ categories }))
         .catch((error) => response.status(500).json({ error }));
 }
 
+/* Edit a category passing its id */
 const editCategory = (request: Request, response: Response, next: NextFunction) => {
     const categoryId = request.params.categoryId
 
@@ -49,6 +53,7 @@ const editCategory = (request: Request, response: Response, next: NextFunction) 
     .catch((error) => response.status(500).json({ error }));
 }
 
+/* Deleting a category passing its id */
 const deleteCategory = (request: Request, response: Response, next: NextFunction) => {
     const userId = request.params.categoryId
 

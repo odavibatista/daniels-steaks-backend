@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose"
 import State from "../models/State";
 
+/* Create a new state */
 const createState = (request: Request, response: Response, next: NextFunction) => {
     const { name } = request.body
 
@@ -15,6 +16,7 @@ const createState = (request: Request, response: Response, next: NextFunction) =
         .catch((error) => response.status(500).json({ error }))
 }
 
+/* Finding a state by its id */
 const getState = (request: Request, response: Response, next: NextFunction) => {
     const stateId = request.params.userId
 
@@ -23,12 +25,14 @@ const getState = (request: Request, response: Response, next: NextFunction) => {
         .catch((error) => response.status(500).json({ error }));
 }
 
+/* Get all the states */
 const getAllStates = (request: Request, response: Response, next: NextFunction) => {
     return State.find()
         .then((states) => response.status(200).json({ states }))
         .catch((error) => response.status(500).json({ error }));
 }
 
+/* Edit a state passing its id */
 const editState = (request: Request, response: Response, next: NextFunction) => {
     const stateId = request.params.userId
 
@@ -48,6 +52,7 @@ const editState = (request: Request, response: Response, next: NextFunction) => 
     .catch((error) => response.status(500).json({ error }));
 }
 
+/* Deleting a state passing its id */
 const deleteState = (request: Request, response: Response, next: NextFunction) => {
     const stateId = request.params.userId
 
