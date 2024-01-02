@@ -22,4 +22,4 @@ const StateSchema: Schema = new Schema(
     }
 )
 
-export default mongoose.model<IStateModel>("Product", StateSchema)
+export default mongoose.model<IStateModel>("State", StateSchema)

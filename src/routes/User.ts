@@ -1,10 +1,11 @@
 import express from 'express'
 import controller from '../controllers/User'
+import { schemas, validateSchema } from '../middleware/ValidateSchema'
 
 const router = express.Router()
 
 /* Create a new user */
-router.post("/create", controller.createUser)
+router.post("/create", validateSchema(schemas.user.create), controller.createUser)
 
 /* Find a user by its id */
 router.get("/get/:userId", controller.getUser)
@@ -13,7 +14,7 @@ router.get("/get/:userId", controller.getUser)
 router.get("/get", controller.getAllUsers)
 
 /* Edit a user passing its id */
-router.patch("/update/:userId", controller.editUser)
+router.patch("/update/:userId", validateSchema(schemas.user.update), controller.editUser)
   
 /* Deleting a user passing its id */
 router.delete("/delete/:userId", controller.deleteUser)
