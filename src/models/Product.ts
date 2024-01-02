@@ -45,7 +45,7 @@ const ProductSchema: Schema = new Schema({
 
     {
         timestamps: true,
-        versionKey: true
+        versionKey: false
     }
 )
 
