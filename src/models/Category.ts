@@ -30,4 +30,4 @@ const CategorySchema: Schema = new Schema(
     }
 )
 
-export default mongoose.model<ICategoryModel>("User", CategorySchema)
+export default mongoose.model<ICategoryModel>("Category", CategorySchema)

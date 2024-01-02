@@ -56,3 +56,5 @@ const deleteCategory = (request: Request, response: Response, next: NextFunction
         .then((category) => (category ? response.status(201).json({ category, message: 'Deleted' }) : response.status(404).json({ message: 'not found' })))
         .catch((error) => response.status(500).json({ error }));
 }
+
+export default { createCategory, getCategory, getAllCategories, editCategory, deleteCategory }
