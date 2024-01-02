@@ -65,4 +65,11 @@ const deleteProduct = (request: Request, response: Response, next: NextFunction)
         .catch((error) => response.status(500).json({ error }));
 }
 
-export default { createProduct, getProduct, getAllProducts, getByCategory, editProduct, deleteProduct }
+export default { 
+    createProduct, 
+    getProduct, 
+    getAllProducts, 
+    getByCategory, 
+    editProduct, 
+    deleteProduct
+}

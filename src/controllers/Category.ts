@@ -57,4 +57,10 @@ const deleteCategory = (request: Request, response: Response, next: NextFunction
         .catch((error) => response.status(500).json({ error }));
 }
 
-export default { createCategory, getCategory, getAllCategories, editCategory, deleteCategory }
+export default { 
+    createCategory, 
+    getCategory, 
+    getAllCategories, 
+    editCategory, 
+    deleteCategory 
+}

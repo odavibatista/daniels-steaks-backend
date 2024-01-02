@@ -59,4 +59,10 @@ const deleteUser = (request: Request, response: Response, next: NextFunction) =>
         .catch((error) => response.status(500).json({ error }));
 }
 
-export default { createUser, getUser, getAllUsers, editUser, deleteUser }
+export default { 
+    createUser, 
+    getUser, 
+    getAllUsers, 
+    editUser, 
+    deleteUser 
+}
