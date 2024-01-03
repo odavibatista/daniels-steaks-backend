@@ -7,6 +7,7 @@ import usersRouter from './routes/User';
 import categoriesRouter from './routes/Category';
 import productsRouter from './routes/Product';
 import statesRouter from './routes/State';
+import authRouter from './routes/Auth';
 
 const router = express();
 
@@ -58,6 +59,8 @@ const StartServer = () => {
     router.use('/products', productsRouter)
 
     router.use('/states', statesRouter)
+
+    router.use('/auth', authRouter)
 
     /** Healthcheck */
     router.get('/ping', (req, res, next) => res.status(200).json({ hello: 'world' }));

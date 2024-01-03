@@ -1,19 +1,15 @@
-import mongoose, { Model, Schema } from "mongoose";
-
-type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void
+import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcrypt";
 
 export interface IUser   {
     name: string
     email: string
     password: string
-    admin: boolean   
+    admin: boolean
 }
 
 export interface UserCreationAttributes extends IUser {}
 
-export interface IUserInstance extends Model<IUser, UserCreationAttributes> {
-    checkPassword: (password: string, callback: CheckPasswordCallback) => void
-}
 
 export interface IUserModel extends IUser {}
 
@@ -22,7 +18,6 @@ const UserSchema: Schema = new Schema(
         name: {
             type: String,
             required: true,
-            unique: true,
             minlength: 3,
             maxlength: 30
         },
@@ -53,5 +48,12 @@ const UserSchema: Schema = new Schema(
         versionKey: false
     }
 )
+
+UserSchema.pre("save", async function (next) {
+    const hash = await bcrypt.hash(this.password, 10)
+    this.password = hash
+
+    next()
+})
 
 export default mongoose.model<IUserModel>("User", UserSchema)

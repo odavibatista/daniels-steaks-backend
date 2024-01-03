@@ -4,9 +4,6 @@ import { schemas, validateSchema } from '../middlewares/ValidateSchema'
 
 const router = express.Router()
 
-/* Create a new user */
-router.post("/create", validateSchema(schemas.user.create), controller.createUser)
-
 /* Find a user by its id */
 router.get("/get/:userId", controller.getUser)
 
