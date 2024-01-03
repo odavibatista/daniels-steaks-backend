@@ -1,14 +1,18 @@
 import jwt from 'jsonwebtoken'
 import { JWT_KEY } from '../config/config'
 
-export const jwtService = {
-  signToken: (payload: string | object | Buffer, expiration: string) => {
+
+  const signToken = (payload: string | object | Buffer, expiration: string) => {
     return jwt.sign(payload, JWT_KEY, {
       expiresIn: expiration
     })
-  },
+  }
 
-  verifyToken: (token: string, callbackfn: jwt.VerifyCallback) => {
+  const verifyToken = (token: string, callbackfn: jwt.VerifyCallback) => {
     jwt.verify(token, JWT_KEY, callbackfn)
   }
+
+export default {
+  signToken,
+  verifyToken
 }

@@ -3,8 +3,8 @@ import { JwtPayload } from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import { JWT_KEY } from '../config/config'
 import User, { IUser, IUserInstance } from '../models/User'
-import { jwtService } from '../services/jwtService'
-import { userService } from '../services/userService'
+import jwtService from '../services/jwtService'
+import userService from '../services/userService'
 
 export interface AuthenticatedRequest extends Request {
     user?: IUserInstance | null

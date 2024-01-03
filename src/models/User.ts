@@ -1,5 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
+
+type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void
 
 export interface IUser   {
     name: string
@@ -10,6 +12,9 @@ export interface IUser   {
 
 export interface UserCreationAttributes extends IUser {}
 
+export interface IUserInstance extends Document, IUser {
+    checkPassword: (password: string, callbackfn: CheckPasswordCallback) => void
+}
 
 export interface IUserModel extends IUser {}
 
