@@ -99,18 +99,24 @@ const editProduct = (
 
   return Product.findById(productId)
 
-    .then((product) => {
+    .then((product: any) => {
       if (product) {
         product.set(request.body);
 
         return product
           .save()
 
-          .then((product) => response.status(201).json({ product }))
+          .then((product: any) => {
+            response.status(201).json({ product })
+            Logging.data(`Produto de id ${productId} editado com sucesso.`)
+          })
 
-          .catch((error) => response.status(500).json({ error }));
+          .catch((error: Error) => {
+            response.status(500).json({ error })
+            Logging.err("Edição de produto mau sucedida.")
+          });
       } else {
-        return response.status(404).json({ message: "not found" });
+        return response.status(404).json({ message: "Produto não encontrado." });
       }
     })
 
@@ -129,7 +135,7 @@ const deleteProduct = (
 
     .then((product) =>
       product
-        ? response.status(201).json({ product, message: "Deleted" })
+        ? response.status(201).json({ product, message: "Produto deletado." })
         : response.status(404).json({ message: "Produto não encontrado." }),
     )
 
