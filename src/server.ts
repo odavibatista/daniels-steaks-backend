@@ -9,6 +9,15 @@ import productsRouter from "./routes/Product";
 import statesRouter from "./routes/State";
 import authRouter from "./routes/Auth";
 
+import('adminjs').then(({AdminJS}) => {
+  import('@adminjs/express').then((AdminJSExpress) => {
+    const adminJs = new AdminJS({})
+    const adminRouter = AdminJSExpress.buildRouter(adminJs)
+
+    router.use(adminJs.options.rootPath, adminRouter)
+  });
+});
+
 const router = express();
 
 /** Connect to Mongo */
