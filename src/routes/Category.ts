@@ -1,11 +1,12 @@
 import express from 'express'
 import controller from '../controllers/Category'
 import { schemas, validateSchema } from '../middlewares/ValidateSchema'
+import Auth from '../middlewares/Auth'
 
 const router = express.Router()
 
 /* Create a new category */
-router.post("/create", validateSchema(schemas.category.create), controller.createCategory)
+router.post("/create", validateSchema(schemas.category.create), Auth.ensureAuth, controller.createCategory)
 
 /* Finding a category by its id */
 router.get("/get/:categoryId", controller.getCategory)
@@ -14,9 +15,9 @@ router.get("/get/:categoryId", controller.getCategory)
 router.get("/get", controller.getAllCategories)
 
 /* Edit a category passing its id */
-router.patch("/update/:categoryId", validateSchema(schemas.category.update), controller.editCategory)
+router.patch("/update/:categoryId", validateSchema(schemas.category.update), Auth.ensureAuth, controller.editCategory)
 
 /* Deleting a category passing its id */
-router.delete("/delete/:categoryId", controller.deleteCategory)
+router.delete("/delete/:categoryId", Auth.ensureAuth, controller.deleteCategory)
 
 export = router

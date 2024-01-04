@@ -1,11 +1,12 @@
 import express from 'express'
 import controller from '../controllers/Product'
 import { schemas, validateSchema } from '../middlewares/ValidateSchema'
+import Auth from '../middlewares/Auth'
 
 const router = express.Router()
 
 /* Create a new product */
-router.post("/create", validateSchema(schemas.product.create), controller.createProduct)
+router.post("/create", validateSchema(schemas.product.create), Auth.ensureAuth, controller.createProduct)
 
 /* Finding a product by its id */
 router.get("/get/:productId", controller.getProduct)
@@ -17,9 +18,9 @@ router.get("/get", controller.getAllProducts)
 router.get("/getByCategory/:categoryId", controller.getByCategory)
 
 /* Edit a product passing its id */
-router.patch("/update/:productId", validateSchema(schemas.product.update), controller.editProduct)
+router.patch("/update/:productId", validateSchema(schemas.product.update), Auth.ensureAuth, controller.editProduct)
 
 /* Deleting a product passing its id */
-router.delete("/delete/:productId", controller.deleteProduct)
+router.delete("/delete/:productId", Auth.ensureAuth, controller.deleteProduct)
 
 export = router

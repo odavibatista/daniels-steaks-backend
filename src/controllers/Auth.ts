@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import User from "../models/User";
 import userService from "../services/userService";
 import jwtService from "../services/jwtService";
+
 /* Create a new user */
 const register = async (request: Request, response: Response, next: NextFunction) => {
     const { name, email, password, admin } = request.body
