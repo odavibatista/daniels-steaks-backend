@@ -17,6 +17,20 @@ export const validateSchema = (schema: ObjectSchema) => {
 }
 
 export const schemas = {
+    auth: {
+        login: Joi.object({
+            email: Joi.string().email().required(),
+            password: Joi.string().required()
+        }),
+
+        register: Joi.object({
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            password: Joi.string().required(),
+            admin: Joi.boolean().required()
+        })
+    },
+
     user: {
         create: Joi.object<IUser>({
             name: Joi.string().required(),

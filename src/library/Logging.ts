@@ -5,7 +5,9 @@ export default class Logging {
 
     public static info = (args: any) => console.log(chalk.blue(`[${new Date().toLocaleString()}] [INFO]`), typeof args === "string" ? chalk.blueBright(args) : args)
 
-    public static warn = (args: any) => console.log(chalk.yellow(`[${new Date().toLocaleString()}] [INFO]`), typeof args === "string" ? chalk.yellowBright(args) : args)
+    public static data = (args: any) => console.log(chalk.magenta(`[${new Date().toLocaleString()}] [DATA]`), typeof args === "string" ? chalk.magentaBright(args) : args)
 
-    public static err = (args: any) => console.log(chalk.red(`[${new Date().toLocaleString()}] [INFO]`), typeof args === "string" ? chalk.redBright(args) : args)
+    public static warn = (args: any) => console.log(chalk.yellow(`[${new Date().toLocaleString()}] [AVISO]`), typeof args === "string" ? chalk.yellowBright(args) : args)
+
+    public static err = (args: any) => console.log(chalk.red(`[${new Date().toLocaleString()}] [ERRO]`), typeof args === "string" ? chalk.redBright(args) : args)
 }
