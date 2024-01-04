@@ -2,33 +2,38 @@ import User from "../models/User";
 import { UserCreationAttributes } from "../models/User";
 import bcrypt from "bcrypt";
 
-type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void
+type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void;
 
 const findByEmail = async (email: string) => {
   const user: any = await User.findOne({ email: email })
-  .then((user) => (user ? user : null)).catch((error) => null)
-  .catch((error) => null)
+    .then((user) => (user ? user : null))
+    .catch((error) => null)
+    .catch((error) => null);
 
-  return user
-}
-  
+  return user;
+};
+
 const create = async (attributes: UserCreationAttributes) => {
-  const user = await User.create(attributes)
-  return user
-}
+  const user = await User.create(attributes);
+  return user;
+};
 
-const checkPassword = async (password: string, otherPassword: string, callbackfn: CheckPasswordCallback) => {
+const checkPassword = async (
+  password: string,
+  otherPassword: string,
+  callbackfn: CheckPasswordCallback,
+) => {
   bcrypt.compare(password, otherPassword, (err, isSame) => {
     if (err) {
-      callbackfn(err)
+      callbackfn(err);
     } else {
-      callbackfn(err, isSame)
+      callbackfn(err, isSame);
     }
-  })
-}
+  });
+};
 
 export default {
-    findByEmail,
-    create,
-    checkPassword
-}
+  findByEmail,
+  create,
+  checkPassword,
+};

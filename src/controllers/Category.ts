@@ -1,120 +1,169 @@
 import { NextFunction, Request, Response, request } from "express";
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 import Category, { ICategory } from "../models/Category";
 import Logging from "../library/Logging";
 
 /* Create a new category */
-const createCategory = (request: Request, response: Response, next: NextFunction) =>    {
-    const { name, description } = request.body
+const createCategory = (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  Logging.warn(
+    `Tentativa de criação de categoria com token ${
+      request.headers.authorization ? request.headers.authorization : "nulo"
+    }.`,
+  );
 
-    const category = new Category({
-        _id: new mongoose.Types.ObjectId(),
-        name,
-        description
-    })
+  const { name, description } = request.body;
 
-    return category.save()
+  const category = new Category({
+    _id: new mongoose.Types.ObjectId(),
+    name,
+    description,
+  });
 
-        .then((category) => {
-            response.status(201).json({ category })
-            Logging.data(`Nova categoria registrada: ${category.name}`)
-        })
+  return category
+    .save()
 
-        .catch((error) => {
-            response.status(500).json({ error })
-            Logging.err(`Tentativa de criação de categoria mau sucedida.`)
-        })
-}
-
-/* Finding a category by its id */
-const getCategory = (request: Request, response: Response, next: NextFunction) => {
-    const categoryId = request.params.categoryId
-
-    return Category.findById(categoryId)
-
-        .then((category) => (category ? response.status(200).json({ category }) : response.status(404).json({ message: 'not found' })))
-
-        .catch((error) => {
-            response.status(500).json({ error })
-            Logging.err(`Tentativa de busca de categoria mau sucedida.`)
-        });
-}
-
-/* Get all the categories */
-const getAllCategories = (request: Request, response: Response, next: NextFunction) => {
-    return Category.find()
-
-        .then((categories) => {
-            response.status(200).json({ categories })
-            Logging.data("Busca de categorias retornada com sucesso.")
-        })
-
-        .catch((error) => {
-            response.status(500).json({ error })
-            Logging.err("Erro ao retornar categorias.")
-        });
-}
-
-/* Edit a category passing its id */
-const editCategory = (request: Request, response: Response, next: NextFunction) => {
-    const categoryId = request.params.categoryId
-
-    return Category.findById(categoryId)
-
-    .then((category: any) => {
-        if (category) {
-            category.set(request.body);
-
-            return category
-                .save()
-
-                .then((category: any) => {
-                    response.status(201).json({ category })
-                    Logging.data(`Categoria ${category.name} atualizada com sucesso.`)
-                })
-
-                .catch((error: Error) => {
-                    response.status(500).json({ error })
-                    Logging.err(`Tentativa de atualização de categoria mau sucedida.`)
-                });
-        } else {
-            Logging.err(`Tentativa de atualização de categoria mau sucedida. Motivo: Categoria não encontrada.`)
-            return response.status(404).json({ message: 'not found' });
-        }
+    .then((category) => {
+      response.status(201).json({ category });
+      Logging.data(`Nova categoria registrada: ${category.name}`);
     })
 
     .catch((error) => {
-        Logging.err(`Tentativa de atualização de categoria mau sucedida.`)
-        response.status(500).json({ error })
+      response.status(500).json({ error });
+      Logging.err(`Tentativa de criação de categoria mau sucedida.`);
     });
-}
+};
+
+/* Finding a category by its id */
+const getCategory = (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  const categoryId = request.params.categoryId;
+
+  return Category.findById(categoryId)
+
+    .then((category) =>
+      category
+        ? response.status(200).json({ category })
+        : response.status(404).json({ message: "not found" }),
+    )
+
+    .catch((error) => {
+      response.status(500).json({ error });
+      Logging.err(`Tentativa de busca de categoria mau sucedida.`);
+    });
+};
+
+/* Get all the categories */
+const getAllCategories = (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  return Category.find()
+
+    .then((categories) => {
+      response.status(200).json({ categories });
+      Logging.data("Busca de categorias retornada com sucesso.");
+    })
+
+    .catch((error) => {
+      response.status(500).json({ error });
+      Logging.err("Erro ao retornar categorias.");
+    });
+};
+
+/* Edit a category passing its id */
+const editCategory = (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  Logging.warn(
+    `Tentativa de edição de categoria com token ${
+      request.headers.authorization ? request.headers.authorization : "nulo"
+    }.`,
+  );
+
+  const categoryId = request.params.categoryId;
+
+  return Category.findById(categoryId)
+
+    .then((category: any) => {
+      if (category) {
+        category.set(request.body);
+
+        return category
+          .save()
+
+          .then((category: any) => {
+            response.status(201).json({ category });
+            Logging.data(`Categoria ${category.name} atualizada com sucesso.`);
+          })
+
+          .catch((error: Error) => {
+            response.status(500).json({ error });
+            Logging.err(`Tentativa de atualização de categoria mau sucedida.`);
+          });
+      } else {
+        Logging.err(
+          `Tentativa de atualização de categoria mau sucedida. Motivo: Categoria não encontrada.`,
+        );
+        return response
+          .status(404)
+          .json({ message: "Categoria não encontrada." });
+      }
+    })
+
+    .catch((error) => {
+      Logging.err(`Tentativa de atualização de categoria mau sucedida.`);
+      response.status(500).json({ error });
+    });
+};
 
 /* Deleting a category passing its id */
-const deleteCategory = (request: Request, response: Response, next: NextFunction) => {
-    const userId = request.params.categoryId
+const deleteCategory = (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  Logging.warn(
+    `Tentativa de deleção de categoria com token ${
+      request.headers.authorization ? request.headers.authorization : "nulo"
+    }.`,
+  );
 
-    return Category.findByIdAndDelete(userId)
+  const userId = request.params.categoryId;
 
-        .then((category: any) => {
-            if (category)   {
-                response.status(201).json({ category, message: 'Deleted' })
-                Logging.data(`Categoria ${category.name} deletada com sucesso.`)
-            }   else    {
-                response.status(404).json({ message: 'not found' })
-                Logging.err(`Tentativa de deleção de categoria mau sucedida. Motivo: Categoria não encontrada.`)
-            }
-        })
+  return Category.findByIdAndDelete(userId)
 
-        .catch((error) => {
-            response.status(500).json({ error })
-            Logging.err(`Tentativa de deleção de categoria mau sucedida.`)
-        });
-}
+    .then((category: any) => {
+      if (category) {
+        response.status(201).json({ category, message: "Deleted" });
+        Logging.data(`Categoria ${category.name} deletada com sucesso.`);
+      } else {
+        response.status(404).json({ message: "not found" });
+        Logging.err(
+          `Tentativa de deleção de categoria mau sucedida. Motivo: Categoria não encontrada.`,
+        );
+      }
+    })
 
-export default { 
-    createCategory, 
-    getCategory, 
-    getAllCategories, 
-    editCategory, 
-    deleteCategory 
-}
+    .catch((error) => {
+      response.status(500).json({ error });
+      Logging.err(`Tentativa de deleção de categoria mau sucedida.`);
+    });
+};
+
+export default {
+  createCategory,
+  getCategory,
+  getAllCategories,
+  editCategory,
+  deleteCategory,
+};
