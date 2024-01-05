@@ -8,13 +8,8 @@ import categoriesRouter from "./routes/Category";
 import productsRouter from "./routes/Product";
 import statesRouter from "./routes/State";
 import authRouter from "./routes/Auth";
-import Category from "./models/Category";
-import AdminJS from "adminjs";
-import AdminJSExpress from "@adminjs/express";
-
 
 const router = express();
-
 
 /** Connect to Mongo */
 mongoose
@@ -46,12 +41,6 @@ const StartServer = () => {
 
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
-
-  const admin = new AdminJS({})
-
-  const adminRouter = AdminJSExpress.buildRouter(admin)
-
-  router.use(admin.options.rootPath, adminRouter)
   
   /** Rules of our API */
   router.use((req, res, next) => {

@@ -23,10 +23,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@adminjs/express": "^5.1.0",
-    "@adminjs/mongoose": "^3.0.1",
-    "@tiptap/pm": "^2.1.13",
-    "adminjs": "^6.6.0",
     "bcrypt": "^5.1.1",
     "bun": "^1.0.20",
     "chalk": "^4.1.2",
