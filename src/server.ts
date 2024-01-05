@@ -12,15 +12,6 @@ import Category from "./models/Category";
 
 const router = express();
 
-/** Connect to Mongo */
-mongoose
-  .connect(config.mongo.url, { retryWrites: true, w: "majority" })
-  .then(() => {
-    Logging.info("Mongo connected successfully.");
-    StartServer();
-  })
-  .catch((error) => Logging.err(error));
-
 import("adminjs").then(({ AdminJS }) => {
   import("@adminjs/express").then((AdminJSExpress) => {
     import("@adminjs/mongoose").then((AdminJSMongoose) => {
@@ -41,6 +32,15 @@ import("adminjs").then(({ AdminJS }) => {
     });
   });
 });
+
+/** Connect to Mongo */
+mongoose
+  .connect(config.mongo.url, { retryWrites: true, w: "majority" })
+  .then(() => {
+    Logging.info("Mongo connected successfully.");
+    StartServer();
+  })
+  .catch((error) => Logging.err(error));
 
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {
