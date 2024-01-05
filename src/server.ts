@@ -8,15 +8,7 @@ import categoriesRouter from "./routes/Category";
 import productsRouter from "./routes/Product";
 import statesRouter from "./routes/State";
 import authRouter from "./routes/Auth";
-
-import('adminjs').then(({AdminJS}) => {
-  import('@adminjs/express').then((AdminJSExpress) => {
-    const adminJs = new AdminJS({})
-    const adminRouter = AdminJSExpress.buildRouter(adminJs)
-
-    router.use(adminJs.options.rootPath, adminRouter)
-  });
-});
+import Category from "./models/Category";
 
 const router = express();
 
@@ -28,6 +20,27 @@ mongoose
     StartServer();
   })
   .catch((error) => Logging.err(error));
+
+import("adminjs").then(({ AdminJS }) => {
+  import("@adminjs/express").then((AdminJSExpress) => {
+    import("@adminjs/mongoose").then((AdminJSMongoose) => {
+      AdminJS.registerAdapter({
+        Resource: AdminJSMongoose.Resource,
+        Database: AdminJSMongoose.Database,
+      });
+
+      const adminOptions = {
+        resources: [Category],
+      };
+
+      const adminJs = new AdminJS(adminOptions);
+
+      const adminRouter = AdminJSExpress.buildRouter(adminJs);
+
+      router.use(adminJs.options.rootPath, adminRouter);
+    });
+  });
+});
 
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {

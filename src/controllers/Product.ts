@@ -107,16 +107,18 @@ const editProduct = (
           .save()
 
           .then((product: any) => {
-            response.status(201).json({ product })
-            Logging.data(`Produto de id ${productId} editado com sucesso.`)
+            response.status(201).json({ product });
+            Logging.data(`Produto de id ${productId} editado com sucesso.`);
           })
 
           .catch((error: Error) => {
-            response.status(500).json({ error })
-            Logging.err("Edição de produto mau sucedida.")
+            response.status(500).json({ error });
+            Logging.err("Edição de produto mau sucedida.");
           });
       } else {
-        return response.status(404).json({ message: "Produto não encontrado." });
+        return response
+          .status(404)
+          .json({ message: "Produto não encontrado." });
       }
     })
 
