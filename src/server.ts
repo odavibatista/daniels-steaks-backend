@@ -9,29 +9,12 @@ import productsRouter from "./routes/Product";
 import statesRouter from "./routes/State";
 import authRouter from "./routes/Auth";
 import Category from "./models/Category";
+import AdminJS from "adminjs";
+import AdminJSExpress from "@adminjs/express";
+
 
 const router = express();
 
-import("adminjs").then(({ AdminJS }) => {
-  import("@adminjs/express").then((AdminJSExpress) => {
-    import("@adminjs/mongoose").then((AdminJSMongoose) => {
-      AdminJS.registerAdapter({
-        Resource: AdminJSMongoose.Resource,
-        Database: AdminJSMongoose.Database,
-      });
-
-      const adminOptions = {
-        resources: [Category],
-      };
-
-      const adminJs = new AdminJS(adminOptions);
-
-      const adminRouter = AdminJSExpress.buildRouter(adminJs);
-
-      router.use(adminJs.options.rootPath, adminRouter);
-    });
-  });
-});
 
 /** Connect to Mongo */
 mongoose
@@ -64,6 +47,12 @@ const StartServer = () => {
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
 
+  const admin = new AdminJS({})
+
+  const adminRouter = AdminJSExpress.buildRouter(admin)
+
+  router.use(admin.options.rootPath, adminRouter)
+  
   /** Rules of our API */
   router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");

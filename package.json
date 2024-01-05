@@ -23,11 +23,11 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@adminjs/express": "^6.1.0",
+    "@adminjs/express": "^5.1.0",
     "@adminjs/import-export": "^3.0.0",
-    "@adminjs/mongoose": "^4.0.0",
+    "@adminjs/mongoose": "^3.0.1",
     "@tiptap/pm": "^2.1.13",
-    "adminjs": "^7.5.2",
+    "adminjs": "^6.6.0",
     "bcrypt": "^5.1.1",
     "bun": "^1.0.20",
     "chalk": "^4.1.2",
@@ -43,4 +43,5 @@
     "node-fetch": "^2.7.0",
     "tslib": "^2.6.2"
   }
+
 }
