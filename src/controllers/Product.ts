@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import Product from "../models/Product";
 import Logging from "../library/Logging";
+import productService from "../services/productService";
 
 /* Create a new product */
 const createProduct = (
@@ -144,6 +145,26 @@ const deleteProduct = (
     .catch((error) => response.status(500).json({ error }));
 };
 
+/* Find a product by its name */
+const search = async (
+  request: Request,
+  response: Response,
+  next: NextFunction,) => {
+    const { title } = request.query
+
+    try {
+      if (typeof title !== 'string') throw new Error('Name must be a string')
+
+      let products = await productService.findByName(title)
+      return response.status(200).json(products)
+    } catch (error) {
+      if (error instanceof Error) {
+        return response.status(400).json({ message: error.message })
+      }
+    }
+}
+
+
 export default {
   createProduct,
   getProduct,
@@ -151,4 +172,5 @@ export default {
   getByCategory,
   editProduct,
   deleteProduct,
+  search,
 };

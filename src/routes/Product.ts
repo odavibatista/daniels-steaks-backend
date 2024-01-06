@@ -22,6 +22,9 @@ router.get("/get", controller.getAllProducts);
 /* Get all the products in a determined category */
 router.get("/getByCategory/:categoryId", controller.getByCategory);
 
+/* Search products by name */
+router.get("/search", controller.search);
+
 /* Edit a product passing its id */
 router.patch(
   "/update/:productId",

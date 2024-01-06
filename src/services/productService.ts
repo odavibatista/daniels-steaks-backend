@@ -1,8 +1,9 @@
 import Product from "../models/Product";
 import { ProductCreationAttributes } from "../models/Product";
 
-const findByName = async (name: string) => {
-    const products: any = await Product.find({ name: name })
+const findByName = async (title: string) => {
+    const products: any = await
+    Product.find({ title: { $regex: title, $options: "i" }  })
         .then((products) => (products ? products : null))
         .catch((error) => null)
         .catch((error) => null);
