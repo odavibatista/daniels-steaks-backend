@@ -6,6 +6,7 @@ export interface IProduct {
   price: number;
   imgUrl: string;
   category: string;
+  featured: boolean;
 }
 
 export interface IProductModel extends IProduct, Document {}
@@ -41,6 +42,7 @@ const ProductSchema: Schema = new Schema(
     featured: {
       type: Boolean,
       default: false,
+      required: true
     },
   },
 

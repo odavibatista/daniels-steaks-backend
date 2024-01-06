@@ -2,6 +2,10 @@ import Joi, { ObjectSchema } from "joi";
 import { Request, Response, NextFunction } from "express";
 import Logging from "../library/Logging";
 import { IUser } from "../models/User";
+import { ICategory } from "../models/Category";
+import { IProduct } from "../models/Product";
+import { IState } from "../models/State";
+import { IStore } from "../models/Store";
 
 export const validateSchema = (schema: ObjectSchema) => {
   return async (request: Request, response: Response, next: NextFunction) => {
@@ -48,19 +52,19 @@ export const schemas = {
   },
 
   category: {
-    create: Joi.object({
+    create: Joi.object<ICategory>({
       name: Joi.string().required(),
       description: Joi.string().required(),
     }),
 
-    update: Joi.object({
+    update: Joi.object<ICategory>({
       name: Joi.string(),
       description: Joi.string(),
     }),
   },
 
   product: {
-    create: Joi.object({
+    create: Joi.object<IProduct>({
       title: Joi.string().required(),
       description: Joi.string().required(),
       price: Joi.number().required(),
@@ -69,7 +73,7 @@ export const schemas = {
       featured: Joi.boolean().required(),
     }),
 
-    update: Joi.object({
+    update: Joi.object<IProduct>({
       title: Joi.string(),
       description: Joi.string(),
       price: Joi.number(),
@@ -80,12 +84,32 @@ export const schemas = {
   },
 
   state: {
-    create: Joi.object({
+    create: Joi.object<IState>({
       name: Joi.string().required(),
     }),
 
-    update: Joi.object({
+    update: Joi.object<IState>({
       name: Joi.string(),
     }),
   },
+
+  store: {
+    create: Joi.object<IStore>({
+      name: Joi.string().required(),
+      address: Joi.string().required(),
+      phone: Joi.string().required(),
+      city: Joi.string().required(),
+      state: Joi.string().required(),
+      imgUrl: Joi.string().required(),
+    }),
+
+    update: Joi.object<IStore>({
+      name: Joi.string(),
+      address: Joi.string(),
+      phone: Joi.string(),
+      city: Joi.string(),
+      state: Joi.string(),
+      imgUrl: Joi.string().required(),
+    }),
+  }
 };

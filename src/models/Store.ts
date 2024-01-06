@@ -6,6 +6,7 @@ export interface IStore {
   phone: string;
   city: string;
   state: string;
+  imgUrl: string;
 }
 
 export interface IStoreModel extends IStore, Document {}
@@ -36,6 +37,12 @@ const StoreSchema: Schema = new Schema({
     required: true,
     ref: "States",
   },
+
+  imgUrl: {
+    type: String,
+    required: false,
+  }
+
 });
 
 export default mongoose.model<IStoreModel>("Store", StoreSchema);

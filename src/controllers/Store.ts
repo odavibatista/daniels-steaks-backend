@@ -15,7 +15,7 @@ const createStore = (
     `Tentativa de criação de loja com token "${token ? token : "nulo"}".`,
   );
 
-  const { name, address, phone, city, state } = request.body;
+  const { name, address, phone, city, state, imgUrl } = request.body;
 
   const store = new Store({
     _id: new mongoose.Types.ObjectId(),
@@ -24,6 +24,7 @@ const createStore = (
     phone,
     city,
     state,
+    imgUrl
   });
 
   return store
