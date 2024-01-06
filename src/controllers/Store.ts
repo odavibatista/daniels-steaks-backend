@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, request } from "express";
 import mongoose from "mongoose";
 import Store from "../models/Store";
 import Logging from "../library/Logging";
+import storeService from "../services/storeService";
 
 /* Create a new store */
 const createStore = (
@@ -77,7 +78,18 @@ const getStoreByState = (
   response: Response,
   next: NextFunction,
 ) => {
-  return Store.find({ state: request.params.stateId });
+  const { state } = request.query
+
+  try {
+    if (typeof state !== 'string') throw new Error('Estado inválido.')
+    
+    const stores = storeService.findByState(request.params.state);
+    return response.status(200).json(stores);
+  } catch (error) {
+    if (error instanceof Error) {
+      return response.status(400).json({ message: error.message });
+    }
+  }
 };
 
 /* Edit a store by passing its id */

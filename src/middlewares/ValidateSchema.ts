@@ -88,7 +88,7 @@ export const schemas = {
       address: Joi.string().required(),
       phone: Joi.string().required(),
       city: Joi.string().required(),
-      state: Joi.string().required(),
+      state: Joi.string().required().max(2).min(2).uppercase(),
       imgUrl: Joi.string().required(),
     }),
 

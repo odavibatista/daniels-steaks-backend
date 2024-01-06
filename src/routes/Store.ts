@@ -19,6 +19,9 @@ router.get("/get/:storeId", controller.getStore);
 /* Get all the stores */
 router.get("/get", controller.getAllStores);
 
+/* Get all the stores by state */
+router.get("/search", controller.getStoreByState);
+
 /* Edit a store passing its id */
 router.patch(
   "/update/:storeId",
