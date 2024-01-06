@@ -25,6 +25,9 @@ router.get("/getByCategory/:categoryId", controller.getByCategory);
 /* Search products by name */
 router.get("/search", controller.search);
 
+/* Get all the featured products */
+router.get("/getFeatured", controller.getFeatured);
+
 /* Edit a product passing its id */
 router.patch(
   "/update/:productId",

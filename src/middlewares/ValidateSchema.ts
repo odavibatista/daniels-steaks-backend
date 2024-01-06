@@ -111,5 +111,5 @@ export const schemas = {
       state: Joi.string(),
       imgUrl: Joi.string().required(),
     }),
-  }
+  },
 };

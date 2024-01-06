@@ -149,21 +149,37 @@ const deleteProduct = (
 const search = async (
   request: Request,
   response: Response,
-  next: NextFunction,) => {
-    const { title } = request.query
+  next: NextFunction,
+) => {
+  const { title } = request.query;
 
-    try {
-      if (typeof title !== 'string') throw new Error('Name must be a string')
+  try {
+    if (typeof title !== "string") throw new Error("Name must be a string");
 
-      let products = await productService.findByName(title)
-      return response.status(200).json(products)
-    } catch (error) {
-      if (error instanceof Error) {
-        return response.status(400).json({ message: error.message })
-      }
+    let products = await productService.findByName(title);
+    return response.status(200).json(products);
+  } catch (error) {
+    if (error instanceof Error) {
+      return response.status(400).json({ message: error.message });
     }
-}
+  }
+};
 
+/* Get featured products only */
+const getFeatured = async (
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) => {
+  try {
+    let products = await productService.findFeatured();
+    return response.status(200).json(products);
+  } catch (error) {
+    if (error instanceof Error) {
+      return response.status(400).json({ message: error.message });
+    }
+  }
+};
 
 export default {
   createProduct,
@@ -173,4 +189,5 @@ export default {
   editProduct,
   deleteProduct,
   search,
+  getFeatured,
 };

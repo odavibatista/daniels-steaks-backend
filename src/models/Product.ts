@@ -44,7 +44,7 @@ const ProductSchema: Schema = new Schema(
     featured: {
       type: Boolean,
       default: false,
-      required: true
+      required: true,
     },
   },
 

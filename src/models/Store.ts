@@ -41,8 +41,7 @@ const StoreSchema: Schema = new Schema({
   imgUrl: {
     type: String,
     required: false,
-  }
-
+  },
 });
 
 export default mongoose.model<IStoreModel>("Store", StoreSchema);

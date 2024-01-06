@@ -30,4 +30,4 @@ router.patch(
 /* Deleting a store passing its id */
 router.delete("/delete/:storeId", Auth.ensureAuth, controller.deleteStore);
 
-export = router
+export = router;

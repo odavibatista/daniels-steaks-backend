@@ -24,7 +24,7 @@ const createStore = (
     phone,
     city,
     state,
-    imgUrl
+    imgUrl,
   });
 
   return store
