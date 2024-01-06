@@ -9,6 +9,8 @@ export interface IProduct {
   featured: boolean;
 }
 
+export interface ProductCreationAttributes extends IProduct {}
+
 export interface IProductModel extends IProduct, Document {}
 
 const ProductSchema: Schema = new Schema(
