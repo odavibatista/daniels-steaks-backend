@@ -31,7 +31,7 @@ export const schemas = {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      admin: Joi.boolean().required(),
+      admin: Joi.boolean().optional().default(false),
     }),
   },
 
@@ -40,7 +40,7 @@ export const schemas = {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      admin: Joi.boolean().required(),
+      admin: Joi.boolean().optional().default(false),
     }),
 
     update: Joi.object<IUser>({
