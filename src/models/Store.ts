@@ -33,9 +33,9 @@ const StoreSchema: Schema = new Schema({
   },
 
   state: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
-    ref: "States",
+    maxlength: 2,
   },
 
   imgUrl: {

@@ -4,7 +4,6 @@ import Logging from "../library/Logging";
 import { IUser } from "../models/User";
 import { ICategory } from "../models/Category";
 import { IProduct } from "../models/Product";
-import { IState } from "../models/State";
 import { IStore } from "../models/Store";
 
 export const validateSchema = (schema: ObjectSchema) => {
@@ -80,16 +79,6 @@ export const schemas = {
       imgUrl: Joi.string(),
       category: Joi.string(),
       featured: Joi.boolean(),
-    }),
-  },
-
-  state: {
-    create: Joi.object<IState>({
-      name: Joi.string().required(),
-    }),
-
-    update: Joi.object<IState>({
-      name: Joi.string(),
     }),
   },
 

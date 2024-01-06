@@ -6,7 +6,6 @@ import Logging from "./library/Logging";
 import usersRouter from "./routes/User";
 import categoriesRouter from "./routes/Category";
 import productsRouter from "./routes/Product";
-import statesRouter from "./routes/State";
 import authRouter from "./routes/Auth";
 import storesRouter from "./routes/Store";
 
@@ -68,8 +67,6 @@ const StartServer = () => {
   router.use("/categories", categoriesRouter);
 
   router.use("/products", productsRouter);
-
-  router.use("/states", statesRouter);
 
   router.use("/auth", authRouter);
 
