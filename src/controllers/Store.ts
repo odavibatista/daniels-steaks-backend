@@ -78,11 +78,11 @@ const getStoreByState = (
   response: Response,
   next: NextFunction,
 ) => {
-  const { state } = request.query
+  const { state } = request.query;
 
   try {
-    if (typeof state !== 'string') throw new Error('Estado inválido.')
-    
+    if (typeof state !== "string") throw new Error("Estado inválido.");
+
     const stores = storeService.findByState(request.params.state);
     return response.status(200).json(stores);
   } catch (error) {

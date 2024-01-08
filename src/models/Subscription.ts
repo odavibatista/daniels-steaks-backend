@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface ISubscription {
-    name: string;
-    email: string;
+  name: string;
+  email: string;
 }
 
 export interface SubscriptionCreationAttributes extends ISubscription {}
@@ -34,4 +34,7 @@ const SubscriptionSchema: Schema = new Schema(
   },
 );
 
-export default mongoose.model<ISubscriptionModel>("Subscription", SubscriptionSchema);
+export default mongoose.model<ISubscriptionModel>(
+  "Subscription",
+  SubscriptionSchema,
+);

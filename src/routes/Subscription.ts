@@ -13,9 +13,13 @@ router.post(
 );
 
 /* Get all the subscriptions */
-router.get("/get", controller.findAll);
+router.get("/get",
+Auth.ensureAuth,
+controller.findAll);
 
 /* Deleting a subscription passing its id */
-router.delete("/delete/:id", controller.remove);
+router.delete("/delete/:id", 
+Auth.ensureAuth,
+controller.remove);
 
 export = router;
