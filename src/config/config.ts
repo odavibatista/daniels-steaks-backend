@@ -6,6 +6,8 @@ export const PORT: string = env.get("PORT").required().asString();
 
 export const JWT_KEY: string = env.get("JWT_KEY").required().asString();
 
+export const ADMIN_KEY: string = env.get("ADMIN_KEY").required().asString();
+
 export const config = {
   mongo: {
     url: DB_URL,
