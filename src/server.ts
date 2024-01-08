@@ -8,6 +8,7 @@ import categoriesRouter from "./routes/Category";
 import productsRouter from "./routes/Product";
 import authRouter from "./routes/Auth";
 import storesRouter from "./routes/Store";
+import subscriptionRouter from "./routes/Subscription";
 
 const router = express();
 
@@ -71,6 +72,8 @@ const StartServer = () => {
   router.use("/auth", authRouter);
 
   router.use("/stores", storesRouter);
+
+  router.use("/subs", subscriptionRouter);
 
   /** Healthcheck */
   router.get("/ping", (req, res, next) =>

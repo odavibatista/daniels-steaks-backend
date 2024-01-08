@@ -101,4 +101,11 @@ export const schemas = {
       imgUrl: Joi.string().required(),
     }),
   },
+
+  subscription: {
+    create: Joi.object({
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+    })
+  }
 };
