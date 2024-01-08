@@ -15,7 +15,7 @@ const register = async (
     `Tentativa de registro de usuário com o e-mail ${request.body.email}`,
   );
 
-  const { name, email, password, admin } = request.body;
+  const { name, email, password, admin = false } = request.body;
 
   const userExists = await userService.findByEmail(email);
 
@@ -29,7 +29,7 @@ const register = async (
     name,
     email,
     password,
-    admin,
+    admin: false,
   });
 
   return user
