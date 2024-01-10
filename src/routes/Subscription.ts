@@ -14,7 +14,7 @@ router.post(
 
 /* Get all the subscriptions */
 router.get("/get",
-Auth.ensureAuth,
+Auth.ensureAdminAuth,
 controller.findAll);
 
 /* Deleting a subscription passing its id */

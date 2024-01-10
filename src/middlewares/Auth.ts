@@ -5,6 +5,7 @@ import { ADMIN_KEY, JWT_KEY } from "../config/config";
 import User, { IUser, IUserInstance } from "../models/User";
 import jwtService from "../services/jwtService";
 import userService from "../services/userService";
+import Logging from "../library/Logging";
 
 export interface AuthenticatedRequest extends Request {
   user?: IUserInstance | null;
@@ -43,12 +44,14 @@ const ensureAdminAuth = (request: AuthenticatedRequest, response: Response, next
   const adminKey: any = request.headers.authorization
 
   if (!adminKey) {
+    Logging.warn(`Tentativa de acesso à rota de administrador sem token de administrador.`);
     return response.status(401).json({ message: "Admin token is missing" });
   }
 
   const token = adminKey.replace(/Bearer /, "");
 
   if (token !== ADMIN_KEY) {
+    Logging.warn(`Tentativa de acesso à rota de administrador com token de administrador inválido.`);
     return response.status(401).json({ message: "Admin token is invalid" });
   }
 
@@ -56,6 +59,7 @@ const ensureAdminAuth = (request: AuthenticatedRequest, response: Response, next
 
   request.user = user;
 
+  Logging.data(`Acesso à rota de administrador autorizado.`);
   next();
 }
 
