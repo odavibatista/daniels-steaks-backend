@@ -4,6 +4,7 @@ import User from "../models/User";
 import userService from "../services/userService";
 import jwtService from "../services/jwtService";
 import Logging from "../library/Logging";
+import { ADMIN_KEY } from "../config/config";
 
 /* Create a new user */
 const register = async (
@@ -65,7 +66,7 @@ const login = async (
     if (!user)
       return response.status(404).json({ message: "E-mail não registrado." });
 
-    userService.checkPassword(password, user.password, (err, isSame) => {
+    userService.checkPassword(password, user.password, async (err, isSame) => {
       if (err) {
         Logging.err(err.message);
         return response.status(400).json({ message: err.message });
@@ -82,7 +83,15 @@ const login = async (
         email: user?.email,
       };
 
-      const token = jwtService.signToken(payload, "7d");
+      const isAdmin = await userService.isAdmin(email)
+
+      let token
+
+      if (isAdmin) {
+        token = ADMIN_KEY
+      } else {
+        token = jwtService.signToken(payload, '7d');
+      }
 
       Logging.data(
         `O usuário ${user.name} (${user?.email}) fez login com sucesso no sistema.`,

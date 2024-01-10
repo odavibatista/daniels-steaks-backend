@@ -1,3 +1,4 @@
+import e from "express";
 import User from "../models/User";
 import { UserCreationAttributes } from "../models/User";
 import bcrypt from "bcrypt";
@@ -32,8 +33,14 @@ const checkPassword = async (
   });
 };
 
+const isAdmin = async (email: string) => {
+  const user = await findByEmail(email);
+  return user?.admin;
+}
+
 export default {
   findByEmail,
   create,
   checkPassword,
+  isAdmin
 };
