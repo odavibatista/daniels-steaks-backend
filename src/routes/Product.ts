@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/create",
   validateSchema(schemas.product.create),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.createProduct,
 );
 
@@ -32,11 +32,11 @@ router.get("/getFeatured", controller.getFeatured);
 router.patch(
   "/update/:productId",
   validateSchema(schemas.product.update),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.editProduct,
 );
 
 /* Deleting a product passing its id */
-router.delete("/delete/:productId", Auth.ensureAuth, controller.deleteProduct);
+router.delete("/delete/:productId", Auth.ensureAdminAuth, controller.deleteProduct);
 
 export = router;

@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/create",
   validateSchema(schemas.store.create),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.createStore,
 );
 
@@ -26,11 +26,11 @@ router.get("/search", controller.getStoreByState);
 router.patch(
   "/update/:storeId",
   validateSchema(schemas.store.update),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.editStore,
 );
 
 /* Deleting a store passing its id */
-router.delete("/delete/:storeId", Auth.ensureAuth, controller.deleteStore);
+router.delete("/delete/:storeId", Auth.ensureAdminAuth, controller.deleteStore);
 
 export = router;

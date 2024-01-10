@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/create",
   validateSchema(schemas.category.create),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.createCategory,
 );
 
@@ -23,14 +23,14 @@ router.get("/get", controller.getAllCategories);
 router.patch(
   "/update/:categoryId",
   validateSchema(schemas.category.update),
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.editCategory,
 );
 
 /* Deleting a category passing its id */
 router.delete(
   "/delete/:categoryId",
-  Auth.ensureAuth,
+  Auth.ensureAdminAuth,
   controller.deleteCategory,
 );
 

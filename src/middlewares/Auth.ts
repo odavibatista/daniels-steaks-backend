@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
-import { JWT_KEY } from "../config/config";
+import { Request, Response, NextFunction, request } from "express";
+import { ADMIN_KEY, JWT_KEY } from "../config/config";
 import User, { IUser, IUserInstance } from "../models/User";
 import jwtService from "../services/jwtService";
 import userService from "../services/userService";
@@ -39,36 +39,27 @@ const ensureAuth = (
   });
 };
 
-const ensureAuthViaQuery = (
-  request: AuthenticatedRequest,
-  response: Response,
-  next: NextFunction,
-) => {
-  const { token } = request.query;
+const ensureAdminAuth = (request: AuthenticatedRequest, response: Response, next: NextFunction) => {
+  const adminKey: any = request.headers.authorization
 
-  if (!token)
-    return response.status(401).json({
-      message: "Não autorizado: nenhum token foi encontrado.",
-    });
+  if (!adminKey) {
+    return response.status(401).json({ message: "Admin token is missing" });
+  }
 
-  if (typeof token !== "string")
-    return response.status(400).json({
-      message: "O parâmetro token deve ser do tipo string",
-    });
+  const token = adminKey.replace(/Bearer /, "");
 
-  jwtService.verifyToken(token, async (err, decoded) => {
-    if (err || typeof decoded === "undefined")
-      return response.status(401).json({
-        message: "Não autorizado: token inválido.",
-      });
+  if (token !== ADMIN_KEY) {
+    return response.status(401).json({ message: "Admin token is invalid" });
+  }
 
-    const user = await userService.findByEmail((decoded as JwtPayload).email);
-    request.user = user;
-    next();
-  });
-};
+  const user: any = userService.findByEmail(request.body.email);
+
+  request.user = user;
+
+  next();
+}
 
 export default {
   ensureAuth,
-  ensureAuthViaQuery,
+  ensureAdminAuth
 };
