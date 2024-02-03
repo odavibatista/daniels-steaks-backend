@@ -80,6 +80,14 @@ const StartServer = () => {
     res.status(200).json({ hello: "world" }),
   );
 
+  router.get("/check", (req, res, next) =>  {
+    try {
+      return res.status(200).json({ message: "OK!" });
+    } catch (error) {
+      return res.status(500).json({ message: "NOT OK!" });
+    }
+  })
+
   /** Error handling */
   router.use((req, res, next) => {
     const error = new Error("Not found");
