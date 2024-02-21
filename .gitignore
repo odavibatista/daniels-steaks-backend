@@ -58,6 +58,7 @@ build/Release
 
 node_modules/
 jspm_packages/
+build/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 
@@ -173,3 +174,6 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Docker
+docker-compose.yml
