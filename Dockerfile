@@ -1,6 +1,6 @@
-FROM node:18-alpine
+FROM node:20
 
-WORKDIR /home/node/daniels-steaks-api
+WORKDIR /home/node/app
 
 COPY package.json ./
 
@@ -13,3 +13,5 @@ COPY . .
 EXPOSE 5000
 
 ENV WAIT_VERSION 2.9.0
+
+CMD ["bun", "dev"]

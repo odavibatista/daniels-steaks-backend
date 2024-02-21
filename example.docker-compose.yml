@@ -5,10 +5,10 @@ services:
     build: .
     container_name: daniels-steaks-api
     ports:
-      - 5050:5000
+      - 5000:5000
     volumes:
-      - .:/home/node/daniels-steaks-api
-    command: bun dev
+      - .:/home/node/app/daniels-steaks-api
+    command: sh -c "npm install && bun dev"
     environment:
       - DB_ENGINE=
       - DB_SERVER=
@@ -16,4 +16,5 @@ services:
       - DB_PASSWORD=
       - DB_CLUSTER=
       - DATABASE=
-    command:
+      - ADMIN_KEY=
+      - JWT_KEY=

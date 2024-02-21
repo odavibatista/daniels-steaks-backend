@@ -4,7 +4,7 @@
   "main": "src/server.ts",
   "scripts": {
     "docker:up": "docker compose up --build -d",
-    "docker:run": "docker run -it --rm -p 5000:5000 daniels-steaks-api",
+    "docker:run": "docker run -it --rm -p 5000:5000 daniels-steaks-backend-migration-app",
     "docker:down": "docker compose down",
     "docker:restart": "docker compose restart",
     "docker:rebuild": "npm run docker:down; npm run docker:up",
