@@ -3,6 +3,12 @@
   "module": "index.ts",
   "main": "src/server.ts",
   "scripts": {
+    "docker:up": "docker compose up --build -d",
+    "docker:run": "docker run -it --rm -p 5000:5000 daniels-steaks-api",
+    "docker:down": "docker compose down",
+    "docker:restart": "docker compose restart",
+    "docker:rebuild": "npm run docker:down; npm run docker:up",
+    "docker:logs": "docker compose logs -f",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "rm -rf build/ && tsc",
     "start": "node build/server.js",
