@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
+import cors from "cors"
 import { config } from "./config/config";
 import Logging from "./library/Logging";
 import usersRouter from "./routes/User";
@@ -39,6 +40,8 @@ const StartServer = () => {
 
     next();
   });
+
+  router.use(cors)
 
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
