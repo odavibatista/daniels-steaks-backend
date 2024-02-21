@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  database:
+    image: mongo
+    restart: always
+    container_name: daniels-steaks-db
+    environment:
+      - DB_ENGINE=
+      - DB_SERVER=
+      - DB_USER=
+      - DB_PASSWORD=
+      - DB_CLUSTER=
+      - DATABASE=
+
+  app:
+    build: .
+    container_name: daniels-steaks-api
+    ports:
+      - 5050:5000
+    volumes:
+      - .:/home/node/daniels-steaks-api
+    links:
+      - database
+    depends_on:
+      - database
+    command:
