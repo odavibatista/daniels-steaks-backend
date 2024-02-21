@@ -12,8 +12,7 @@
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "rm -rf build/ && tsc",
     "start": "node build/server.js",
-    "format": "prettier --write src/",
-    "postinstall": "tsc"
+    "format": "prettier --write src/"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
