@@ -8,7 +8,7 @@ services:
       - 5000:5000
     volumes:
       - .:/home/node/app/daniels-steaks-api
-    command: sh -c "npm install && bun dev"
+    command: sh -c "npm install && bun postinstall && bun dev"
     environment:
       - DB_ENGINE=
       - DB_SERVER=
@@ -18,3 +18,4 @@ services:
       - DATABASE=
       - ADMIN_KEY=
       - JWT_KEY=
+      - PORT=5000
