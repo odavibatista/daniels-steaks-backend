@@ -1,6 +1,6 @@
 FROM node:20
 
-WORKDIR /home/node/app
+WORKDIR /home/node/app/daniels-steaks-api
 
 COPY package.json ./
 

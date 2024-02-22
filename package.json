@@ -12,7 +12,7 @@
     "docker:logs": "docker compose logs -f",
     "dev": "bun run src/server.ts",
     "build": "rm -rf build/ && tsc",
-    "start": "node build/server.js",
+    "start": "bun build/src/server.js",
     "format": "prettier --write src/"
   },
   "devDependencies": {
