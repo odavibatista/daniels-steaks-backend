@@ -26,13 +26,14 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@adminjs/express": "^6.1.0",
     "@adminjs/mongoose": "^4.0.0",
     "adminjs": "^7.6.0",
     "bcrypt": "^5.1.1",
+    "bun": "^1.0.28",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
