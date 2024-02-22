@@ -2,6 +2,7 @@
   "name": "daniels-steaks-backend",
   "module": "index.ts",
   "main": "src/server.ts",
+  "type": "module",
   "scripts": {
     "docker:up": "docker compose up --build -d",
     "docker:run": "docker run -it --rm -p 5000:5000 daniels-steaks-backend-migration-app",
@@ -28,8 +29,10 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@adminjs/express": "^6.1.0",
+    "@adminjs/mongoose": "^4.0.0",
+    "adminjs": "^7.6.0",
     "bcrypt": "^5.1.1",
-    "bun": "^1.0.20",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -43,5 +46,4 @@
     "node-fetch": "^2.7.0",
     "tslib": "^2.6.2"
   }
-
 }

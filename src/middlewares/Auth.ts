@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction, request } from "express";
-import { ADMIN_KEY, JWT_KEY } from "../config/config";
-import User, { IUser, IUserInstance } from "../models/User";
-import jwtService from "../services/jwtService";
-import userService from "../services/userService";
-import Logging from "../library/Logging";
+import { ADMIN_KEY, JWT_KEY } from "../config/config.js";
+import User, { IUser, IUserInstance } from "../models/User.js";
+import jwtService from "../services/jwtService.js";
+import userService from "../services/userService.js";
+import Logging from "../library/Logging.js";
 
 export interface AuthenticatedRequest extends Request {
   user?: IUserInstance | null;

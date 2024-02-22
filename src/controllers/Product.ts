@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
-import Product from "../models/Product";
-import Logging from "../library/Logging";
-import productService from "../services/productService";
+import Product from "../models/Product.js";
+import Logging from "../library/Logging.js";
+import productService from "../services/productService.js";
 
 /* Create a new product */
 const createProduct = (

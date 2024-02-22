@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
-import Logging from "../library/Logging";
-import SubscriptionService from "../services/subscriptionService";
+import Logging from "../library/Logging.js";
+import SubscriptionService from "../services/subscriptionService.js";
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const subscription = await SubscriptionService.create(req.body);

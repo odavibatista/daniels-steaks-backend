@@ -1,7 +1,7 @@
 import express from "express";
-import controller from "../controllers/User";
-import { schemas, validateSchema } from "../middlewares/ValidateSchema";
-import Auth from "../middlewares/Auth";
+import controller from "../controllers/User.js";
+import { schemas, validateSchema } from "../middlewares/ValidateSchema.js";
+import Auth from "../middlewares/Auth.js";
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.patch(
 /* Deleting a user passing its id */
 router.delete("/delete/:userId", Auth.ensureAdminAuth, controller.deleteUser);
 
-export = router;
+export default router

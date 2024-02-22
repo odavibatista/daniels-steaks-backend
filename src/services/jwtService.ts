@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_KEY } from "../config/config";
+import { JWT_KEY } from "../config/config.js";
 
 const signToken = (payload: string | object | Buffer, expiration: string) => {
   return jwt.sign(payload, JWT_KEY, {

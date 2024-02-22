@@ -1,4 +1,4 @@
-import Store from "../models/Store";
+import Store from "../models/Store.js";
 
 const findByState = async (state: string) => {
   const stores: any = await Store.find({

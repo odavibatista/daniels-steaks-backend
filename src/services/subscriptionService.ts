@@ -1,7 +1,7 @@
 import Subscription, {
   SubscriptionCreationAttributes,
-} from "../models/Subscription";
-import Logging from "../library/Logging";
+} from "../models/Subscription.js";
+import Logging from "../library/Logging.js";
 
 const create = async (attributes: SubscriptionCreationAttributes) => {
   Logging.data(

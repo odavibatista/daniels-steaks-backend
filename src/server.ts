@@ -1,15 +1,14 @@
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
-import cors from "cors"
-import { config } from "./config/config";
-import Logging from "./library/Logging";
-import usersRouter from "./routes/User";
-import categoriesRouter from "./routes/Category";
-import productsRouter from "./routes/Product";
-import authRouter from "./routes/Auth";
-import storesRouter from "./routes/Store";
-import subscriptionRouter from "./routes/Subscription";
+import { config } from "./config/config.js";
+import Logging from "./library/Logging.js";
+import usersRouter from "./routes/User.js";
+import categoriesRouter from "./routes/Category.js";
+import productsRouter from "./routes/Product.js";
+import authRouter from "./routes/Auth.js";
+import storesRouter from "./routes/Store.js";
+import subscriptionRouter from "./routes/Subscription.js";
 
 const router = express();
 
@@ -40,8 +39,6 @@ const StartServer = () => {
 
     next();
   });
-
-  router.use(cors)
 
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());

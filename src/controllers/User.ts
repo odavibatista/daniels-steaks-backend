@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/User";
-import Logging from "../library/Logging";
+import User from "../models/User.js";
+import Logging from "../library/Logging.js";
 
 /* Finding a user by its id */
 const getUser = (request: Request, response: Response, next: NextFunction) => {

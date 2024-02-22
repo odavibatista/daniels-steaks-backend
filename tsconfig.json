@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "lib": ["ES6"],
-    "module": "Node16",
-    "target": "ES2016",
+    "module": "NodeNext",
+    "target": "ESNext",
+    "rootDir": "./src",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "moduleDetection": "auto",

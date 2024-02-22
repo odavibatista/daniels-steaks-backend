@@ -1,5 +1,5 @@
-import Product from "../models/Product";
-import { ProductCreationAttributes } from "../models/Product";
+import Product from "../models/Product.js";
+import { ProductCreationAttributes } from "../models/Product.js";
 
 const findByName = async (title: string) => {
   const products: any = await Product.find({

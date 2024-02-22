@@ -1,7 +1,7 @@
 import express from "express";
-import controller from "../controllers/Subscription";
-import { schemas, validateSchema } from "../middlewares/ValidateSchema";
-import Auth from "../middlewares/Auth";
+import controller from "../controllers/Subscription.js";
+import { schemas, validateSchema } from "../middlewares/ValidateSchema.js";
+import Auth from "../middlewares/Auth.js";
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.delete("/delete/:id",
 Auth.ensureAuth,
 controller.remove);
 
-export = router;
+export default router

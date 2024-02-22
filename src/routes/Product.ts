@@ -1,7 +1,7 @@
 import express from "express";
-import controller from "../controllers/Product";
-import { schemas, validateSchema } from "../middlewares/ValidateSchema";
-import Auth from "../middlewares/Auth";
+import controller from "../controllers/Product.js";
+import { schemas, validateSchema } from "../middlewares/ValidateSchema.js";
+import Auth from "../middlewares/Auth.js";
 
 const router = express.Router();
 
@@ -39,4 +39,4 @@ router.patch(
 /* Deleting a product passing its id */
 router.delete("/delete/:productId", Auth.ensureAdminAuth, controller.deleteProduct);
 
-export = router;
+export default router
