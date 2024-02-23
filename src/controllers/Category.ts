@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, request } from "express";
 import mongoose from "mongoose";
-import Category, { ICategory } from "../models/Category";
-import Logging from "../library/Logging";
+import Category, { ICategory } from "../models/Category.js";
+import Logging from "../library/Logging.js";
 
 /* Create a new category */
 const createCategory = (

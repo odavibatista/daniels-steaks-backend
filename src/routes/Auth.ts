@@ -1,6 +1,6 @@
 import express from "express";
-import controller from "../controllers/Auth";
-import { schemas, validateSchema } from "../middlewares/ValidateSchema";
+import controller from "../controllers/Auth.js";
+import { schemas, validateSchema } from "../middlewares/ValidateSchema.js";
 
 const router = express.Router();
 
@@ -14,4 +14,5 @@ router.post(
 /* Login */
 router.post("/login", validateSchema(schemas.auth.login), controller.login);
 
-export = router;
+
+export default router

@@ -1,6 +1,6 @@
 import e from "express";
-import User from "../models/User";
-import { UserCreationAttributes } from "../models/User";
+import User from "../models/User.js";
+import { UserCreationAttributes } from "../models/User.js";
 import bcrypt from "bcrypt";
 
 type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void;

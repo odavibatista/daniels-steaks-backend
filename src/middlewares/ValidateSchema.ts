@@ -1,10 +1,10 @@
 import Joi, { ObjectSchema } from "joi";
 import { Request, Response, NextFunction } from "express";
-import Logging from "../library/Logging";
-import { IUser } from "../models/User";
-import { ICategory } from "../models/Category";
-import { IProduct } from "../models/Product";
-import { IStore } from "../models/Store";
+import Logging from "../library/Logging.js";
+import { IUser } from "../models/User.js";
+import { ICategory } from "../models/Category.js";
+import { IProduct } from "../models/Product.js";
+import { IStore } from "../models/Store.js";
 
 export const validateSchema = (schema: ObjectSchema) => {
   return async (request: Request, response: Response, next: NextFunction) => {

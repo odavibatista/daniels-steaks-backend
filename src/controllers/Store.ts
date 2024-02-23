@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, request } from "express";
 import mongoose from "mongoose";
-import Store from "../models/Store";
-import Logging from "../library/Logging";
-import storeService from "../services/storeService";
+import Store from "../models/Store.js";
+import Logging from "../library/Logging.js";
+import storeService from "../services/storeService.js";
 
 /* Create a new store */
 const createStore = (

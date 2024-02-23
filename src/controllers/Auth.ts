@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
-import User from "../models/User";
-import userService from "../services/userService";
-import jwtService from "../services/jwtService";
-import Logging from "../library/Logging";
-import { ADMIN_KEY } from "../config/config";
+import User from "../models/User.js";
+import userService from "../services/userService.js";
+import jwtService from "../services/jwtService.js";
+import Logging from "../library/Logging.js";
+import { ADMIN_KEY } from "../config/config.js";
 
 /* Create a new user */
 const register = async (

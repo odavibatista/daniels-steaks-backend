@@ -1,7 +1,7 @@
 import express from "express";
-import controller from "../controllers/Category";
-import { schemas, validateSchema } from "../middlewares/ValidateSchema";
-import Auth from "../middlewares/Auth";
+import controller from "../controllers/Category.js";
+import { schemas, validateSchema } from "../middlewares/ValidateSchema.js";
+import Auth from "../middlewares/Auth.js";
 
 const router = express.Router();
 
@@ -34,4 +34,4 @@ router.delete(
   controller.deleteCategory,
 );
 
-export = router;
+export default router
