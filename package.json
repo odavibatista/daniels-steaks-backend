@@ -28,7 +28,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "bun": "^1.1.40",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
