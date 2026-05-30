@@ -39,7 +39,7 @@
     "express-session": "^1.18.2",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.22.1",
     "node-fetch": "^2.7.0",
     "tslib": "^2.6.2"
   }
